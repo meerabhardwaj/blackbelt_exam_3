@@ -6,5 +6,19 @@
     </head>
     <body>
         <a href="{% url 'login:logout' %}">Logout</a>
+
+        {% for trip in trips %}
+            <ul>
+                <li>{{trip.destination}}</li>
+                <li>{{trip.description}}</li>
+                <li>{{trip.start_date}}</li>
+                <li>{{trip.end_date}}</li>
+                <li>{{trip.creator}}</li>
+                <li>{{trip.joiners}}</li>
+
+
+            </ul>
+        {% endfor %}
+        <a href="{%url 'travels:add' %}">Add a Trip</a>
     </body>
 </html>
