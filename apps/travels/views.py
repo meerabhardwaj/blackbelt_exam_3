@@ -4,6 +4,8 @@ from django.shortcuts import render
 
 
 def travels(request):
+
+        # add in trips for the user and trips added by other users for the two tables
     return render(request, 'travels/travels.html')
 
 
