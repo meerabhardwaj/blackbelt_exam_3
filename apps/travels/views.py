@@ -10,8 +10,8 @@ def travels(request):
     context = {
         "user": User.objects.get(id=request.session['user_id']),
         "trips": Plan.objects.all(),
-        "my_trips": Plan.objects.filter(creator=User.objects.get(id=request.session['user_id'])),
-        "others_trips": Plan.objects.exclude(creator=User.objects.get(id=request.session['user_id']))
+        "my_trips": Plan.objects.filter(joiners=User.objects.get(id=request.session['user_id'])),
+        "others_trips": Plan.objects.exclude(joiners=User.objects.get(id=request.session['user_id']))
     }
 
     # add in trips for the user and trips added by other users for the two tables

@@ -16,6 +16,10 @@
             </ul>
         </div>
         {% endif %}
+
+        {% for trip in my_joined_trips %}
+            {{trip.destination}}
+        {% endfor %}
         <h3>Your Trip Schedule</h3>
             <table>
                 <thead>
