@@ -3,6 +3,8 @@ from __future__ import unicode_literals
 from django.db import models
 from ..log_reg.models import User
 
+from datetime import datetime
+
 # Create your models here.
 
 
@@ -15,8 +17,11 @@ class PlanManager(models.Manager):
             errors.append('This form cannot have any empty entires!')
 
         # travel dates should be future-dated
-
+        # if postData['start_date'] <= datetime.now():
+            # errors.append('The date for this trip should be in the future!')
         # travel end dates should be after start_date
+        # if datetime.postData['start_date'] >= datetime.postData['end_date']:
+            # errors.append('The date that this ends must be after it starts!')
 
         response_to_views = {}
         if not errors:

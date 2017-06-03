@@ -23,8 +23,7 @@ def destination(request, id):
         messages.add_message(request, messages.ERROR, "Please login.")
         return redirect('login:main')
     context = {
-        "trip_deets": Plan.objects.filter(id=id),
-        "joiners": Plan.objects.filter(joiners=id)
+        "trip_deets": Plan.objects.filter(id=id)
     }
     return render(request, 'travels/destination.html', context)
 
