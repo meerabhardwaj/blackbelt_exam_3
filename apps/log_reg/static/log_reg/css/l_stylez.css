@@ -1,0 +1,26 @@
+body {
+    padding: 20px;
+}
+.login{
+    background-color: green;
+    margin-top: 10px;
+    color: white;
+}
+.register{
+    background-color: blue;
+    margin-top: 10px;
+    color: white;
+}
+.log_reg{
+    display: inline-block;
+    width: 50%
+    padding: 10px;
+}
+.display_message{
+    display: inline-block;
+    width: 400px;
+    padding: 10px;
+    background-color: red;
+    vertical-align: top;
+    margin: 50px;
+}

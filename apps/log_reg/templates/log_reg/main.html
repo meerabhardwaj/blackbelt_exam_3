@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Login/Registration</title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'log_reg/css/l_stylez.css' %}">
+    </head>
+    <body>
+        <div class="log_reg">
+            <h1>Registration</h1>
+            <form action="/registration" method="post">
+                {% csrf_token %}
+                <p>Name:</p> <input type="text" name="name">
+                <p>Username:</p> <input type="text" name="username">
+                <p>Password:</p> <input type="password" name="pword">
+                <p>Password must be 8 characters!</p>
+                <p>Confirm PW:</p> <input type="password" name="confirm_pword"><br>
+                <input class="register" type="submit" name="submit" value="Register">
+            </form>
+
+            <h1>Login</h1>
+            <form action="/login" method="post">
+                {% csrf_token %}
+                <p>Username:</p><input type="text" name="username">
+                <p>Password:</p><input type="password" name="password"><br>
+                <input class="login" type="submit" name="submit" value="Login">
+            </form>
+        </div>
+        {% if messages %}
+        <div class="display_message">
+            <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </body>
+</html>
