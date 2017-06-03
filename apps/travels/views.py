@@ -8,8 +8,10 @@ from ..log_reg.models import User
 
 def travels(request):
     context = {
-        "users": User.objects.all(),
-        "trips": Plan.objects.all()
+        "user": User.objects.get(id=request.session['user_id']),
+        "trips": Plan.objects.all(),
+        "my_trips": Plan.objects.filter(creator=User.objects.get(id=request.session['user_id'])),
+        "others_trips": Plan.objects.exclude(creator=User.objects.get(id=request.session['user_id']))
     }
 
     # add in trips for the user and trips added by other users for the two tables
@@ -17,7 +19,10 @@ def travels(request):
 
 
 def destination(request, id):
-    return render(request, 'travels/destination.html')
+    context = {
+        "trip_deets": Plan.objects.filter(id=id)
+    }
+    return render(request, 'travels/destination.html', context)
 
 
 def add(request):

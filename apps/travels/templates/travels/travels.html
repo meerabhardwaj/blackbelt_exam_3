@@ -6,19 +6,44 @@
     </head>
     <body>
         <a href="{% url 'login:logout' %}">Logout</a>
+        <h1>Hello, {{ user.name }}!</h1>
+        <h3>Your Trip Schedule</h3>
+            <table>
+                <thead>
+                    <th>Destination</th>
+                    <th>Travel Start Date</th>
+                    <th>Travel End Date</th>
+                    <th>Plan</th>
+                </thead>
+                {% for trip in my_trips %}
+                <tr>
+                    <td><a href="{% url 'travels:destination' id=trip.id %}">{{trip.destination}}</a></td>
+                    <td>{{trip.start_date}}</td>
+                    <td>{{trip.end_date}}</td>
+                    <td>{{trip.description}}</td>
+                </tr>
+                {% endfor %}
+            </table>
 
-        {% for trip in trips %}
-            <ul>
-                <li>{{trip.destination}}</li>
-                <li>{{trip.description}}</li>
-                <li>{{trip.start_date}}</li>
-                <li>{{trip.end_date}}</li>
-                <li>{{trip.creator}}</li>
-                <li>{{trip.joiners}}</li>
-
-
-            </ul>
-        {% endfor %}
+        <h3>Other User's Travel Plans</h3>
+            <table>
+                <thead>
+                    <th>Name</th>
+                    <th>Destination</th>
+                    <th>Travel Start Date</th>
+                    <th>Travel End Date</th>
+                    <th>Do You Want to Join?</th>
+                </thead>
+                {% for trip in others_trips %}
+                    <tr>
+                        <td>{{trip.creator.name}}</td>
+                        <td><a href="{% url 'travels:destination' id=trip.id %}">{{trip.destination}}</a></td>
+                        <td>{{trip.start_date}}</td>
+                        <td>{{trip.end_date}}</td>
+                        <td><a href="{% url 'travels:join' id=request.session.user_id trip_id=trip.id %}">Join</a></td>
+                    </tr>
+                {% endfor %}
+            </table>
         <a href="{%url 'travels:add' %}">Add a Trip</a>
     </body>
 </html>
