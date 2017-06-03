@@ -37,8 +37,16 @@ class PlanManager(models.Manager):
 
         return response_to_views
 
-    def join_trip(self, id, user_id):
-        pass
+    def join_trip(self, id, trip_id):
+        response_to_views = {}
+        joining_trip = Plan.objects.filter(id=trip_id)
+        if joining_trip:
+            joining_trip = self.get(id=trip_id).joiners.add(User.objects.get(id=id))
+            response_to_views['status'] = True
+        else:
+            response_to_views['status'] = False
+            response_to_views['errors'] = "Trip not found or joined."
+        return response_to_views
 
 
 class Plan(models.Model):

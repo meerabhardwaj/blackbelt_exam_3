@@ -19,8 +19,12 @@ def travels(request):
 
 
 def destination(request, id):
+    if not 'user_id' in request.session:
+        messages.add_message(request, messages.ERROR, "Please login.")
+        return redirect('login:main')
     context = {
-        "trip_deets": Plan.objects.filter(id=id)
+        "trip_deets": Plan.objects.filter(id=id),
+        "joiners": Plan.objects.filter(joiners=id)
     }
     return render(request, 'travels/destination.html', context)
 
@@ -45,4 +49,11 @@ def create(request):
 
 
 def join(request, id, trip_id):
-    pass
+    response_from_models = Plan.objects.join_trip(id, trip_id)
+    if response_from_models:
+        messages.add_message(request, messages.SUCCESS,
+                             "The trip has been added to your trips!")
+    else:
+        for error in response_from_models['errors']:
+            messages.add_message(request, messages.ERROR, error)
+    return redirect('travels:dashboard')

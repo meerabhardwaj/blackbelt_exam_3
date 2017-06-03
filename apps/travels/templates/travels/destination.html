@@ -16,8 +16,10 @@
             <p>Travel Date From: {{trip.start_date}}</p>
             <p>Travel Date To: {{trip.end_date}}</p>
         <h3>Other users joining the trip:</h3>
-
-            <p>{{trip.joiners.name}}</p>
+            {{trip.joiners}}
+            {% for name in joiners %}
+            <p>{{name.name}}</p>
+            {% endfor %}
 
         {% endfor%}
     </body>

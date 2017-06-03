@@ -7,6 +7,15 @@
     <body>
         <a href="{% url 'login:logout' %}">Logout</a>
         <h1>Hello, {{ user.name }}!</h1>
+        {% if messages %}
+        <div class="display_message">
+            <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
         <h3>Your Trip Schedule</h3>
             <table>
                 <thead>
